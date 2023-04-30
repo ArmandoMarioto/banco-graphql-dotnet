@@ -8,13 +8,13 @@ namespace challenge.Interfaces
 {
     public interface IContaRepository
     {
-        IQueryable<Conta> GetAllAsync();
-        Conta GetById(Double id);
-        Conta DepositarAsync(Double id, Double quantidade);
+        IQueryable<ContaBancaria> GetAllAsync();
+        ContaBancaria GetById(int id);
+        ContaBancaria DepositarAsync(ContaBancaria conta, Double quantidade);
 
 
-        Conta SacarAsync(Double id, Double quantidade);
+        ContaBancaria SacarAsync(ContaBancaria conta, Double quantidade);
 
-        Conta Save(Conta entity);
+        ContaBancaria Save(ContaBancaria conta);
     }
 }

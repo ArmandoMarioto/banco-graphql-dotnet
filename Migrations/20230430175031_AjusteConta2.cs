@@ -6,7 +6,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace challenge.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationInitial : Migration
+    public partial class AjusteConta2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,16 +15,16 @@ namespace challenge.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Contas",
+                name: "ContasBancaria",
                 columns: table => new
                 {
-                    Numero = table.Column<int>(type: "int", nullable: false)
+                    Conta = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Saldo = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contas", x => x.Numero);
+                    table.PrimaryKey("PK_ContasBancaria", x => x.Conta);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
         }
@@ -33,7 +33,7 @@ namespace challenge.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contas");
+                name: "ContasBancaria");
         }
     }
 }

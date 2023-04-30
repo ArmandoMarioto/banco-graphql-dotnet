@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using challenge.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,11 +10,11 @@ namespace challenge.Database
         {
         }
 
-        public DbSet<Conta> Contas { get; set; }
+        public DbSet<ContaBancaria> ContasBancaria { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Conta>().HasKey(c => c.Numero);
+            modelBuilder.Entity<ContaBancaria>().HasKey(c => c.Conta);
         }
     }
 }

@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace challenge.Models
 {
-    public class Conta
+    public class ContaBancaria
     {
-        public int? Numero { get; set; }
+        public int? Conta { get; set; }
         public Double Saldo { get; set; }
     }
 }

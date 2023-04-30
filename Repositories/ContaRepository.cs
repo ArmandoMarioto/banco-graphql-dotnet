@@ -13,46 +13,46 @@ namespace challenge.Repositories
         private readonly BancoContext _db;
         public ContaRepository(BancoContext db) => _db = db;
 
-        public IQueryable<Conta> GetAllAsync()
+        public IQueryable<ContaBancaria> GetAllAsync()
         {
-            return _db.Contas.AsQueryable();
+            return _db.ContasBancaria.AsQueryable();
         }
 
-        public Conta GetById(double id)
+        public ContaBancaria GetById(int id)
         {
-            return _db.Contas.SingleOrDefault(c => c.Numero == id);
+            return _db.ContasBancaria.SingleOrDefault(c => c.Conta == id);
         }
 
-        public Conta DepositarAsync(Double id, Double quantidade)
+        public ContaBancaria DepositarAsync(ContaBancaria conta, Double quantidade)
         {
-            var conta = GetById(id);
             if (conta != null)
             {
                 conta.Saldo += quantidade;
-                _db.SaveChanges();
+                _db.ContasBancaria.Update(conta);
+                _db.SaveChangesAsync();
             }
             return conta;
         }
 
-        public Conta SacarAsync(Double id, Double quantidade)
+        public ContaBancaria SacarAsync(ContaBancaria conta, Double quantidade)
         {
-            var conta = GetById(id);
             if (conta != null && conta.Saldo >= quantidade)
             {
                 conta.Saldo -= quantidade;
-                _db.SaveChanges();
+                _db.ContasBancaria.Update(conta);
+                _db.SaveChangesAsync();
             }
             return conta;
         }
 
-        public Conta Save(Conta conta)
+        public ContaBancaria Save(ContaBancaria conta)
         {
-            if (!conta.Numero.HasValue)
+            if (!conta.Conta.HasValue)
             {
                 Random random = new Random();
-                conta.Numero = random.Next(10000, 99999);
+                conta.Conta = random.Next(10000, 99999);
                 conta.Saldo = 0;
-                _db.Contas.Add(conta);
+                _db.ContasBancaria.Add(conta);
             }
 
             _db.SaveChanges();

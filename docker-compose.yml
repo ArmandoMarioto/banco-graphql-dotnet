@@ -12,6 +12,10 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    networks:
+      - my_network
+
   app:
     build:
       context: .
@@ -27,5 +31,14 @@ services:
       DB_PASSWORD: 123456
     depends_on:
       - db
+    command: >
+      /bin/sh -c "dotnet ef database update &&
+                  dotnet challenge.dll"
+    networks:
+      - my_network
+
 volumes:
   db_data:
+
+networks:
+  my_network:
