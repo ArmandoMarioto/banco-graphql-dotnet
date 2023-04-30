@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: challenge_db
+      MYSQL_USER: armando
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: challenge_db
+      DB_USER: armando
+      DB_PASSWORD: 123456
+    depends_on:
+      - db
+volumes:
+  db_data:
