@@ -5,9 +5,9 @@
 O primeiro passo é fazer um clone do projeto deste repositório. 
 ```
 git clone https://github.com/ArmandoMarioto/banco-graphql-dotnet.git
-
+```
 e
-
+```
 cd .\banco-graphql-dotnet\
 ```
 É necessario ter instalado o docker em sua maquina.
