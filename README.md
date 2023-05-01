@@ -23,8 +23,20 @@ Após finalizar rode:
 ```
 docker-compose up
 ```
+- Espera até essa mensagem aparecer, lembre-se que pode demorar um pouco.
+```
+banco-graphql-dotnet-app-1  | info: Microsoft.Hosting.Lifetime[14]
+banco-graphql-dotnet-app-1  |       Now listening on: http://[::]:80
+banco-graphql-dotnet-app-1  | info: Microsoft.Hosting.Lifetime[0]
+banco-graphql-dotnet-app-1  |       Application started. Press Ctrl+C to shut down.
+banco-graphql-dotnet-app-1  | info: Microsoft.Hosting.Lifetime[0]
+banco-graphql-dotnet-app-1  |       Hosting environment: Production
+banco-graphql-dotnet-app-1  | info: Microsoft.Hosting.Lifetime[0]
+banco-graphql-dotnet-app-1  |       Content root path: /app
+```
 
 Se tudo ocorrer corretamente os dois container(App e o mysql) vão está rodando.
+
 
 Agora basta acessar
 
