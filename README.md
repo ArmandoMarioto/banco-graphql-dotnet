@@ -80,3 +80,7 @@ query BuscarTodos{
   }
 }
 ```
+
+-Para rodar os testes unitarios, usando Visual Studio basta clicar com o botão direito do mouse na pasta chamada "Testes" e executar os testes, como na imagem abaixo.
+![image](https://user-images.githubusercontent.com/49081127/235495872-3337b943-1d9b-493e-b3d5-4877d8e9d28a.png)
+
