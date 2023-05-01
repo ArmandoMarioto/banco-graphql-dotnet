@@ -2,7 +2,8 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["challenge.csproj", "."]
 RUN dotnet restore "./challenge.csproj"
-EXPOSE 8080
+
+
 RUN apt-get update && \
     apt-get install -y wget && \
     wget https://packages.microsoft.com/config/ubuntu/21.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
@@ -34,9 +35,11 @@ RUN dotnet add package Microsoft.EntityFrameworkCore.Tools.DotNet --version 2.0.
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 COPY --from=build /app/build .
 COPY wait-for.sh /app/wait-for.sh
 RUN chmod +x /app/wait-for.sh
+
+EXPOSE 80
+EXPOSE 443
+
 ENTRYPOINT ["dotnet", "challenge.dll"]
