@@ -29,15 +29,32 @@ app.MapGraphQL();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
+    var retryCount = 3;
+    var retryDelay = TimeSpan.FromSeconds(30);
+
+    while (retryCount > 0)
     {
-        var db = services.GetRequiredService<BancoContext>();
-        db.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating the database.");
+        try
+        {
+            var db = services.GetRequiredService<BancoContext>();
+            db.Database.Migrate();
+            break; // se migração bem sucedida, sair do loop
+        }
+        catch (Exception ex)
+        {
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred while migrating the database. Retrying in {0} seconds...", retryDelay.TotalSeconds);
+
+            retryCount--;
+            if (retryCount == 0)
+            {
+                logger.LogError(ex, "Failed to migrate the database after multiple retries.");
+            }
+            else
+            {
+                Thread.Sleep(retryDelay); // esperar um pouco antes de tentar novamente
+            }
+        }
     }
 }
 
